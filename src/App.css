@@ -1,38 +1,168 @@
-.App {
+/* Font and layout */
+body {
+  background-color: #f4f6f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.ballot-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px 35px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(253, 184, 30, 0.15); /* subtle yellow shadow */
   text-align: center;
+  border: 1px solid #dce3ea;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Logo styling */
+.vcnj-logo {
+  display: block;
+  margin: 0 auto 18px auto;
+  max-width: 140px;
+  height: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Headings */
+h1 {
+  font-size: 2rem;
+  color: #003366; /* Navy */
+  margin-bottom: 0.4rem;
+  font-weight: 700;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  user-select: none;
+}
+
+th, td {
+  padding: 12px 10px;
+  text-align: center;
+  border-bottom: 1px solid #e6ecf2;
+  vertical-align: middle;
+}
+
+th {
+  color: #003366;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background-color: #fff7e6; /* very light yellow */
+}
+
+td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Custom radio buttons */
+/* Blue outline */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid #003366; /* Navy blue outline */
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+input[type="radio"]:hover {
+  border-color: #001f4d; /* Darker navy on hover */
+}
+
+/* Checked: fill yellow with navy border */
+input[type="radio"]:checked {
+  background-color: #fdb81e; /* Yellow fill */
+  border-color: #003366; /* Keep border navy */
+}
+
+/* Submit button */
+.submit-button {
+  margin-top: 28px;
+  padding: 12px 32px;
+  font-size: 1.05rem;
+  background-color: #003366; /* Navy */
   color: white;
+  border: none; /* No outline */
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.submit-button:hover {
+  background-color: #fdb81e; /* Yellow background on hover */
+  color: #003366; /* Navy text on hover */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Result box */
+.result-box {
+  margin-top: 26px;
+  padding: 20px 25px;
+  border-radius: 10px;
+  font-size: 1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.result-box.success {
+  background-color: #e7f4ff;
+  border: 2px solid #003366;
+  color: #003366;
+}
+
+.result-box.error {
+  background-color: #fff1f0;
+  border: 2px solid #ff4d4f;
+  color: #a8071a;
+}
+
+/* Links inside result box */
+.result-box a {
+  color: #fdb81e;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.result-box a:hover {
+  color: #c49b18;
+  text-decoration: underline;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 600px) {
+  .ballot-container {
+    margin: 25px 15px;
+    padding: 25px 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  table, th, td {
+    font-size: 0.85rem;
+  }
+
+  .submit-button {
+    padding: 10px 26px;
+    font-size: 0.95rem;
   }
 }
