@@ -8,6 +8,7 @@ const candidates = [
   "Asbury Park Beach",
   "Wildwood Beach"
 ];
+
 const ranks = ["1st", "2nd", "3rd", "4th", "5th"];
 
 function App() {
@@ -19,7 +20,9 @@ function App() {
       const updated = { ...prev };
       // Remove the previous candidate that had this rank
       for (let key in updated) {
-        if (updated[key] === rank) updated[key] = null;
+        if (updated[key] === rank) {
+          updated[key] = null;
+        }
       }
       updated[candidate] = rank;
       return updated;
@@ -27,13 +30,19 @@ function App() {
   };
 
   const handleSubmit = () => {
+    const assignedRanks = Object.values(votes).filter(Boolean);
+    const missingRanks = ranks.filter((rank) => !assignedRanks.includes(rank));
+
     const rankedChoices = Object.entries(votes)
       .filter(([_, rank]) => rank !== null && rank !== undefined)
       .sort((a, b) => ranks.indexOf(a[1]) - ranks.indexOf(b[1]))
       .map(([candidate]) => candidate);
 
-    if (rankedChoices.length < ranks.length) {
-      setSubmittedOrder({ error: "Please rank all 5 beaches before submitting." });
+    if (missingRanks.length > 0) {
+      const formatted = missingRanks.join(", ").replace(/, ([^,]*)$/, " and $1");
+      setSubmittedOrder({
+        error: `You're missing the following rank${missingRanks.length > 1 ? "s" : ""}: ${formatted}. Ranked Choice Voting works best when you rank every candidate. That way, if your top pick doesn't win right away, your next choices still count — and your voice stays in the process. Try assigning each beach a unique rank so your full preferences can be counted fairly.`
+      });
       return;
     }
 
@@ -97,8 +106,12 @@ function App() {
                 ))}
               </ol>
               <p>
-                To learn more about Ranked Choice Voting and how it works in New Jersey, visit&nbsp;
-                <a href="https://www.voterchoicenj.org/" target="_blank" rel="noopener noreferrer">
+                To learn more about Ranked Choice Voting and how it works in New Jersey, visit{" "}
+                <a
+                  href="https://www.voterchoicenj.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Voter Choice NJ
                 </a>.
               </p>
